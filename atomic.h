@@ -34,6 +34,7 @@
 #ifndef _UTIL_ATOMIC_H_
 #define _UTIL_ATOMIC_H_ 1
 
+#define _GNU_SOURCE
 #include <stdint.h>
 #include <stdio.h>
 #include <pthread.h>
@@ -41,8 +42,8 @@
 #if !defined(__DOXYGEN__)
 /* Internal helper functions. */
 
-extern pthread_mutex_t _atomic_mutex;
-extern uint32_t _atomic_count;
+pthread_mutex_t __attribute__((weak)) _atomic_mutex = PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
+uint32_t __attribute__((weak)) _atomic_count = 0;
 
 static __inline__ void __sei(uint8_t type)
 {
