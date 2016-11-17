@@ -39,6 +39,14 @@
 #include <stdio.h>
 #include <pthread.h>
 
+#ifndef PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP
+#  ifdef PTHREAD_RECURSIVE_MUTEX_INITIALIZER
+#    define PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP PTHREAD_RECURSIVE_MUTEX_INITIALIZER
+#  else
+#    error "PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP undefined, make sure to define _GNU_SOURCE globally"
+#  endif
+#endif
+
 #if !defined(__DOXYGEN__)
 /* Internal helper functions. */
 
